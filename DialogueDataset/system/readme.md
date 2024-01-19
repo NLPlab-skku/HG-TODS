@@ -1,1 +1,1 @@
-### 언어분석기 (NLPLAB5/NRF/MultiWoZ)
+### 대화수집기시스템 (NLPLAB5/NRF/MultiWoZ)

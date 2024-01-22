@@ -38,11 +38,11 @@
   
 
 ### 학습 방법
-'''
+```
 bash DO.train.sh
-'''
+```
 
-'''
+```
 python main_dst.py \
     --output_dir ${OUT_DIR} \
     --do_train \
@@ -54,7 +54,7 @@ python main_dst.py \
     --train_batch_size 8 \
     --gradient_accumulation_steps 1 \
     --n_epochs 5
-'''
+```
 
 decoding 옵션을 sequential, ind_decoding으로 설정하여 순차적 디코딩, 독립적 디코딩 수행
 

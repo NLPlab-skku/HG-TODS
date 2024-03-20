@@ -1,0 +1,26 @@
+hydra :
+  run :
+    dir : ${experiment_dir}
+
+datamodule:
+  data_dir : '/workspace/NRF/data'
+  batch_size : 8
+  max_history : 100
+  generate_max_length : 64
+  method : ${method}
+
+defaults:
+ - learner : bart
+
+seed : 42
+devices : 0
+num_training_steps : 100000
+patience : 5
+wandb : True
+gradient_accumulation_steps : 1
+
+method : 'BART-gnn-rgat' # BART, BART-triple, BART-gnn-gat, BART-gnn-rgat, BART-gnn-gcn BART-gnn-dualrgat # BART-gnn-rgat
+experiment_dir : '/workspace/NRF/experiment/${method}_test'
+ckpt_path : '/workspace/NRF/experiment/old/${method}/epoch=14-step=7830.ckpt' #  '/workspace/NRF/experiment/${method}_test/epoch=23-step=13800.ckpt' # 'best'
+wandb_dir : '/workspace/NRF/wandb/${method}_test'
+description : ''

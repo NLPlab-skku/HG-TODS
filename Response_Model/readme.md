@@ -19,7 +19,7 @@ python main.py  \
     -- method='BART-gnn-dualrgat'
 ```
 
-- method 옵션을 ['BART', 'BART-triple','BART-gnn-dualrgat']으로 설정하여 BART Fine-tuning, 트리플, 그래프 인코더 방식으로 학습 수행
+- method 옵션을 ['BART', 'BART-triple', 'BART-gnn-dualrgat']으로 설정하여 BART Fine-tuning, 트리플, 그래프 인코더 방식으로 학습 수행
 
 - 학습 결과를 ROUGE-1, ROUGE-2, ROUGE-L로 평가
 

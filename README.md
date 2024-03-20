@@ -17,9 +17,7 @@
 |제목|내용|위치|
 |------|---|---|
 |**[1] Dialogue state tracking**|대화 상태 추적 모델(koBART) 대화 히스토리를 바탕으로 현 발화의 대화 상태 추적|./DST_model|
-|**[2] Response generation**|대화 응답 생성 모델(koBART) 대화 상태 추적 결과를 바탕으로 서브그래프 추출
-
-대화 히스토리와 입력하여 대화 응답 생성 |./Response_model|
+|**[2] Response generation**|대화 응답 생성 모델(koBART) 대화 상태 추적 결과를 바탕으로 서브그래프 추출   대화 히스토리와 입력하여 대화 응답 생성 |./Response_model|
 
 ### Setup
 ```

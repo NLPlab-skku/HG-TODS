@@ -10,7 +10,7 @@
 
 ### 예시
 ```
-가까이 Antonym 멀리
+가까이	Antonym 멀리
 한국어	IsA	언어
 귀요미	Synonym	귀여운
 ```

@@ -16,8 +16,8 @@
 ## Model
 |제목|내용|위치|
 |------|---|---|
-|**Dialogue state tracking**|대화 상태 추적 모델(koBART)|./DST_model|
-|**Response generation**|대화 응답 생성 모델(koBART)|./Response_model|
+|**[1] Dialogue state tracking**|대화 상태 추적 모델(koBART)|./DST_model|
+|**[2] Response generation**|대화 응답 생성 모델(koBART)|./Response_model|
 
 ### Setup
 ```

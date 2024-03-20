@@ -13,6 +13,6 @@
 ### 예시
 - song.json
 
-'''
+```
  {"title": "It's Raining Men (The Weather Girls) (Remix ver.)", "genre": ["일렉트로닉"], "artist": ["한용진"], "writer": [""], "composer": [""]}
-'''
+```

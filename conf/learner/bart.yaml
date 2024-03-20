@@ -1,0 +1,15 @@
+d_model : 768
+num_heads : 16
+num_encoder_layers : 6
+num_decoder_layers : 6
+dropout : 0.1
+attention_dropout : 0.0
+activation_dropout : 0.0
+max_position_embeddings : 1026 
+plm_vocab_size : 30000 # tokenizer.from_pretrained('facebook/bart-large')
+generate_max_length : 64
+learning_rate : 3e-5
+node_len : 512
+num_gnn : 2
+method : ${method}
+experiment_dir : ${experiment_dir}

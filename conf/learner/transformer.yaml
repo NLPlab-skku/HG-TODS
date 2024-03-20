@@ -1,0 +1,16 @@
+learner:
+  d_model : 512
+  num_heads : 8
+  num_encoder_layers : 6
+  num_decoder_layers : 6
+  dropout : 0.1
+  attention_dropout : 0.1
+  activation_dropout : 0.1
+  max_position_embeddings : 1024
+  plm_vocab_size : 30000
+  generate_max_length : 64
+  learning_rate : 3e-5
+  node_len : 512 # 통계필요
+  num_gnn : 2
+  gnn : GAT # GCN GAT RGAT
+  model : GRAPH # VANILLA GRAPH GREASE

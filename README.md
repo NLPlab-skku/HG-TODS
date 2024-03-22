@@ -8,10 +8,20 @@
 - 목적 지향 응답 생성 시 상식, 도메인, 개인화 그래프 등의 **이종 지식그래프 베이스**를 활용  
 
 ## Dataset
+### 대화 코퍼스
+|제목|내용|위치|
+|------|---|---|
+|**음악 도메인 대화 데이터셋**|음악 도메인 기반의 대화 데이터|./CommonsenseDataset|
+|**음악 도메인, 일상 대화 데이터셋**|음악 도메인 대화에 일반 상식 일상 대화가 추가된 데이터|./DialogueDataset|
+|**매뉴얼 기반 대화 데이터셋**|전자기기 도메인 기반의 대화 데이터|./DialogueDataset|
+|**대화 수집기**|대화 수집 시스템|./DialogueDataset/system|
+
+### 지식 그래프
 |제목|내용|위치|
 |------|---|---|
 |**Commonsense**|한국어 상식 외부지식 그래프|./CommonsenseDataset|
-|**Domain**|음악 도메인, 개인화 외부지식 그래프|./GraphDataset|
+|**Domain**|음악 도메인 외부지식 그래프|./DialogueDataset/Music_knowledge_graph|
+|**Personal**|개인화 외부지식 그래프|./DialogueDataset/Music_personal_graph||
 
 ## Model
 |제목|내용|위치|

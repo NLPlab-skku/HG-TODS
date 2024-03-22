@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<title>Chat Room</title>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+<body>
+    <form method="POST">
+    {% csrf_token %}
+        <div id="main-container">
+
+            <div class="view">
+                <p id="html_doc_title">doc</p>
+                <p id="html_section_title">section</p>
+                <p id="html_body"></p>
+            </div>
+
+            <div class="view">
+                <select id="sections" name="sections" style="width:100%;">
+                    {% for section in section_list %}
+                    <option value="{{section.section_id}}">{{section.doc_title}} $ {{section.section_title}}</option>
+                    {% endfor %}
+                </select><br>
+                <div id="span-container">
+                    {% for span in span_list %}
+                    <input type="checkbox" id="check" name="spans" value="{{span.span_id}}" oninput="inChat('{{span.span_id}}')">{{span.span_text}} <br>
+                    {% endfor %}
+                    <input type="checkbox" id="check" name="spans" value="0" oninput="inChat('{{span.span_id}}')">해당사항 없음 <br>
+                </div>
+            </div>
+
+            <div class="view">
+                <div id="chat-container">
+                    <h3 style="float:right">User</h3>
+                    <h3>System</h3>
+                    {% for conv in conversation_list %}
+                        {% if conv.flag == 0 %}
+                            <div style="background-color:lightgray; padding:3px;">
+                                {{conv.conv_text}}
+                            </div>
+                        {% elif conv.flag == 1 %}
+                            <div align="right" style="padding:3px;">
+                                {{conv.conv_text}}
+                            </div>
+                        {% else %}
+                            <div>Error</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <span id="role">{{role}}</span>
+                <input id="chat" type="text" name="chat" style="width:62%;" oninput="inChat('-1')">
+                <input type="submit" value="제출"  style="width:20%; font-size:20px;">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div align="center" style="color:red">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="view">
+                {% if role == 'User' %}
+                <h3>Scenario</h3>
+                <div id="scenario">
+                    <ol>
+                        {% for section in section_list %}
+                        <li>{{section.doc_title}} $ {{section.section_title}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+        
+    </form>
+
+
+    <div id="nav-container">
+        <a href="{% url 'chatlistpage' %}">
+            <button class="enter_btn" type="button" name="back">목록으로</button>
+        </a>
+        <a href="{% url 'chatlistpage' %}">
+            <button class="enter_btn" id="clear_btn" type="submit" name="finish">수집 완료</button>
+        </a>
+        <a href="{% url 'chatlistpage' %}">
+            <button style="float:right" class="enter_btn" id="delete_btn" type="submit" name="delete">채팅방 삭제</button>
+        </a>
+    </div>
+
+</body>
+<script>
+    const doc_title = "{{section_list.0.doc_title}}";
+    $('#html_doc_title').html(doc_title);
+    const section_title = "{{section_list.0.section_title}}";
+    $('#html_section_title').html(section_title);
+    const html_body = "{{section_list.0.section_html | escapejs}}";
+    $('#html_body').html(html_body);
+
+    $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+
+    $('#clear_btn').on('click', function(e) {
+        let data = {
+            'room_id' : "{{ room_id }}", 
+            'content' : 'clear',
+        }
+        $.ajax({
+            type:'POST',
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            url:"{% url 'clearRoom' %}",
+            data: JSON.stringify(data),
+            success:function(json){
+                console.log("data pass success",json);
+            },
+            error : function(xhr,errmsg,err) {
+                alert("error");
+            }
+        });
+    });
+
+    $('#delete_btn').on('click', function(e) {
+        let data = {
+            'room_id' : "{{ room_id }}", 
+            'content' : 'delete',
+        }
+        $.ajax({
+            type:'POST',
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            url:"{% url 'deleteRoom' %}",
+            data: JSON.stringify(data),
+            success:function(json){
+                console.log("data pass success",json);
+            },
+            error : function(xhr,errmsg,err) {
+                alert("error");
+            }
+        });
+    });
+
+    $('#sections').change(function() {
+        $.ajax({
+            type: "GET",
+            url: "{% url 'chatroompage' room_id role %}",
+            data: {
+                'section_id': this.value
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#span-container').empty();
+                for (var span of response.span_list) {
+                    var dom = "<input type='checkbox' name='spans' value='" + span.span_id + "'>" + span.span_text + " <br>";
+                    $('#span-container').append(dom);
+                }
+                var dom = "<input type='checkbox' id='check' name='spans' value='0'>해당사항 없음 <br>";
+                $('#span-container').append(dom);
+
+                $('#html_doc_title').html(response.doc_title);
+                $('#html_section_title').html(response.section_title);
+                $('#html_body').html(response.section_html);
+            },
+            error: function() {
+                console.log("error!");
+            }
+        });
+        var section_index = this.selectedIndex;
+        console.log(section_index);
+    })
+
+    setInterval(function() {
+        let data = {
+            'section_id': this.value,
+            'room_id' : "{{ room_id }}",
+        }
+        $.ajax({
+            url: "{% url 'checkDB' %}",
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            type: "POST",
+            dataType: "json",
+            data: {'send_data': "{{ room_id }}"},
+            success: function(data){
+                console.log(data);  
+                conversation_list = data;
+                $("#chat-container").load(location.href+" #chat-container>*","");
+            },beforeSend:function(){
+                console.log("i am waiting");
+            },complete:function(){
+                console.log("i am done");
+            },error: function (request, status, error) {
+                console.log('i am failed');
+            }
+        });
+    }, 3000);
+
+    // var lists = [];
+    // function inChat(check_id){
+    //     var inputed = $("#chat").val();
+    //     if(check_id != -1){
+    //         if(lists.includes(check_id)){
+    //             lists.splice(lists.indexOf(check_id), 1)
+    //         }else {
+    //             lists.push(check_id)
+    //         }
+    //     }
+    //     if(inputed != '' || lists.length != 0){
+    //         flag = false;
+    //     } else {
+    //         flag = true;
+    //     }
+    // }
+
+    // var flag = true;
+    // setInterval(function() {
+    //     if(flag){
+    //         location.reload();
+    //     }
+    // }, 3000);
+
+</script>
+</html>

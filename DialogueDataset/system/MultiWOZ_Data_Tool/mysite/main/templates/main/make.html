@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<title>Make Chat</title>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+
+<body>
+    <div class="center">
+        <div>
+            <h1>채팅방 생성</h1> 
+        </div>
+    	<form action="{% url 'makepage' %}" method="POST">
+       	{% csrf_token %}
+            <div>
+                <p>
+                    <label>User name:</label>
+                    <input type="text" name="user_name">
+                </p>
+                <p>
+                    <label>System name:</label>
+                    <input type="text" name="system_name">
+                </p>
+            </div>
+            <button type="submit">생성하기</button>
+        </form>
+        <a href="{% url 'chatlistpage' %}">
+            <button class="enter_btn">목록으로</button>
+        </a>
+    </div>
+</body>
+</html>

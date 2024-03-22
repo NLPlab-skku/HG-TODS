@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<title>Main</title>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+<body>
+    <div class="center">
+        <div>
+            <h1>대화데이터 수집</h1> 
+        </div>
+        
+        <a href="{% url 'chatlistpage' %}">
+            <button class="enter_btn">입장하기</button>
+        </a>
+    </div>
+</body>
+</html>

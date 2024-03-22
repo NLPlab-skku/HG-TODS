@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<title>Select Role</title>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+<body>
+    <div class="center">
+        <div>
+            <h1>역할 선택</h1> 
+        </div>
+    
+        <div>
+            <a href="{% url 'chatroompage' room_id=room_id role='User' %}">
+                <button class="enter_btn">User</button>
+            </a>
+            <a href="{% url 'chatroompage' room_id=room_id role='System' %}">
+                <button class="enter_btn">System</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

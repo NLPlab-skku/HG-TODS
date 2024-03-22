@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<title>Chat List</title>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+<body>
+    <div class="center">
+        <div>
+            <h1>채팅방 목록</h1> 
+        </div>
+
+        {% for chat in chat_list %}
+            <a href="{% url 'selectpage' chat.room_id %}">
+                <div class="list">
+		            <h3>{{chat.room_id}}</h3>
+                    <p>User : {{chat.user_name}} System : {{chat.system_name}}</p>
+                </div>
+            </a>
+	    {% endfor %}
+
+        <a href="{% url 'makepage' %}">
+            <button class="enter_btn">생성하기</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -11,10 +11,11 @@
 ### 대화 코퍼스
 |제목|내용|위치|
 |------|---|---|
-|**음악 도메인 대화 데이터셋**|음악 도메인 기반의 대화 데이터|./DialogueDataset/Music_knowledge_graph_grounded_dialogues|
-|**음악 도메인, 일상 대화 데이터셋**|음악 도메인 대화에 일반 상식 일상 대화가 추가된 데이터|./DialogueDataset/Music_commonsense_knowledge_graph_grounded_dialogues|
-|**매뉴얼 기반 대화 데이터셋**|전자기기 도메인 기반의 대화 데이터|./DialogueDataset/Manual_grounded_dialogue_dataset|
-|**대화 수집기**|대화 수집 시스템|./DialogueDataset/system|
+||./DialogueDataset|
+|**음악 도메인 대화 데이터셋**|음악 도메인 기반의 대화 데이터|/Music_knowledge_graph_grounded_dialogues|
+|**음악 도메인, 일상 대화 데이터셋**|음악 도메인 대화에 일반 상식 일상 대화가 추가된 데이터|/Music_commonsense_knowledge_graph_grounded_dialogues|
+|**매뉴얼 기반 대화 데이터셋**|전자기기 도메인 기반의 대화 데이터|/Manual_grounded_dialogue_dataset|
+|**대화 수집기**|대화 수집 시스템|/system|
 
 ### 지식 그래프
 |제목|내용|위치|
